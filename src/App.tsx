@@ -1,11 +1,10 @@
-import React from 'react';
 import './styles/App.css';
 
 import Toolbar from './Toolbar';
 import Editor from './Editor';
 import ProgramTable from './ProgramTable';
 
-function App() {
+export default function App() {
     return (
         <div className="App">
             <Toolbar />
@@ -14,5 +13,3 @@ function App() {
         </div>
     );
 }
-
-export default App;
