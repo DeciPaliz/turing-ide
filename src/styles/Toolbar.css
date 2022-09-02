@@ -1,0 +1,29 @@
+.Toolbar {
+    width: 100vw;
+    height: 60px;
+    background: #3310BF;
+    display: flex;
+    justify-content: center;
+}
+.Toolbar > div {
+    position: absolute;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.Toolbar-left {
+    left: 10px;
+}
+
+.Toolbar-center {
+    display: flex;
+    justify-content: center;
+}
+.Toolbar-center > div {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.Toolbar-right {
+    right: 10px;
+}

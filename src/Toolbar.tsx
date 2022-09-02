@@ -9,11 +9,17 @@ import HelpButton from './components/toolbar/HelpButton';
 export default function Toolbar() {
     return (
         <div className="Toolbar">
-            <TitleText />
-            <RunButton />
-            <SaveButton />
-            <ExportButton />
-            <HelpButton />
+            <div className="Toolbar-left">
+                <TitleText />
+            </div>
+            <div className="Toolbar-center">
+                <RunButton />
+                <SaveButton />
+                <ExportButton />
+            </div>
+            <div className="Toolbar-right">
+                <HelpButton />
+            </div>
         </div>
     );
 }

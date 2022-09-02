@@ -3,7 +3,7 @@ import BaseToolbarButton, { BaseToolbarButtonProps } from './BaseToolbarButton';
 
 export default class ExportButton extends BaseToolbarButton {
     constructor(props: BaseToolbarButtonProps) {
-        super(props, "BaseToolbarButton");
+        super(props, "ExportButton");
     }
 
     override click() {}

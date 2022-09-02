@@ -1,8 +1,11 @@
-import save from './save';
-import exportTable from './exporttable';
-import importTable from './importtable';
-import parseTable from './parsetable';
-import Table from './table';
+import Table from './types/table';
+
+import save from './functions/save';
+import exportTable from './functions/exporttable';
+import importTable from './functions/importtable';
+import parseTable from './functions/parsetable';
+
+import resources from './config/resources';
 
 // global namespace
 let turing = {
@@ -12,11 +15,13 @@ let turing = {
     save,
     exportTable,
     importTable,
-    parseTable
+    parseTable,
+
+    resources
 };
 
 turing.initialize = function () {
-    // load last programtable from localstorage
+    // TODO: load last programtable from localstorage
 };
 
 export default turing;
