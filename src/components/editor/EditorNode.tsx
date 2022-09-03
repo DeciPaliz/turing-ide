@@ -2,13 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import '../../styles/components/editor/EditorNode.css';
 
-const DEFAULT_VALUE = "a₀";
-const DOUBLE_CLICK_INTERVAL = 300;
 
 export default function EditorNode(props: { value: string | null, onSetStart: Function, onInput: Function, start: boolean, focus: boolean }) {
     const inputRef = useRef(null);
+    const EMPTY_SYMBOL = globalThis.turing.config.EMPTY_SYMBOL;
+    const DOUBLE_CLICK_INTERVAL = globalThis.turing.config.DOUBLE_CLICK_INTERVAL;
     
-    const [value, setValue] = useState(props.value || DEFAULT_VALUE);
+    const [value, setValue] = useState(props.value || EMPTY_SYMBOL);
     const [style, setStyle] = useState((props.value ? "" : " null") + (props.start ? " start" : ""));
 
     let lastClick: number = 0;
@@ -16,7 +16,7 @@ export default function EditorNode(props: { value: string | null, onSetStart: Fu
     function handleChange(ev: React.ChangeEvent) {
         const event = ev.nativeEvent as InputEvent;
         if (event.inputType === "deleteContentBackward") {
-            setValue(DEFAULT_VALUE);
+            setValue(EMPTY_SYMBOL);
             setStyle(style + " null");
             props.onInput(false);
             return;
@@ -36,7 +36,6 @@ export default function EditorNode(props: { value: string | null, onSetStart: Fu
             // doubleclick
             props.onSetStart();
             setStyle(style + " start");
-            console.log(ev.nativeEvent!.target);
         }
         lastClick = ev.timeStamp;
     }
@@ -46,6 +45,7 @@ export default function EditorNode(props: { value: string | null, onSetStart: Fu
         target.setSelectionRange(1, 1);
     }
 
+    // start changed
     useEffect(() => {
         if (props.start) {
             setStyle(style + " start");
@@ -54,9 +54,19 @@ export default function EditorNode(props: { value: string | null, onSetStart: Fu
         }
     }, [props.start]);
 
+    // focus changed
     useEffect(() => {
         if (props.focus) (inputRef.current! as HTMLInputElement).focus();
     }, [props.focus]);
+
+    // on mount
+    useEffect(() => {
+        if (props.start) {
+            const target = inputRef.current! as HTMLInputElement;
+            console.log(target);
+            target.parentElement!.parentElement!.scrollLeft = target.parentElement!.offsetLeft - window.innerWidth / 2 + target.parentElement!.offsetWidth / 2;
+        }
+    }, []);
 
     return (
         <div className={"EditorNode" + " " + style}>

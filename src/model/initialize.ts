@@ -1,4 +1,5 @@
-import Table from './types/table';
+import Table, { EMPTY_SYMBOL, DEFAULT_TABLE } from './types/table';
+import Tape, { DEFAULT_TAPE } from './types/tape';
 
 import save from './functions/save';
 import exportTable from './functions/exporttable';
@@ -15,12 +16,22 @@ declare global {
 export default function initialize() {
     globalThis.turing = {
         table: null as Table | null,
+        tape: null as Tape | null,
 
-        save,
-        exportTable,
-        importTable,
-        parseTable,
+        utils: {
+            save,
+            exportTable,
+            importTable,
+            parseTable
+        },
 
-        resources
+        resources,
+
+        config: {
+            EMPTY_SYMBOL,
+            DEFAULT_TABLE,
+            DEFAULT_TAPE,
+            DOUBLE_CLICK_INTERVAL: 300
+        }
     };
 }

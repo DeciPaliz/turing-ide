@@ -3,10 +3,10 @@ import './styles/Editor.css';
 
 import EditorNode from './components/editor/EditorNode';
 
-export default function Editor(props: { start: number }) {
-    const [tape, setTape] = useState<Array<string | null>>([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "a", "b", "c", null, null, null, null, null, null, null, null, null, null, null]); 
+export default function Editor() {
+    const [tape, setTape] = useState<Array<string | null>>(globalThis.turing.config.DEFAULT_TAPE.nodes); 
     let firstStarts = new Array(tape.length).fill(false);
-    firstStarts[props.start] = true;
+    firstStarts[globalThis.turing.config.DEFAULT_TAPE.start] = true;
     const [starts, setStarts] = useState(firstStarts);
     const [focuses, setFocuses] = useState(new Array(tape.length).fill(false));
 
