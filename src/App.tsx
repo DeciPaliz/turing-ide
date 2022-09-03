@@ -11,7 +11,7 @@ export default class App extends React.Component {
         return (
             <div className="App">
                 <Toolbar />
-                <Editor />
+                <Editor start={10} />
                 <ProgramTable />
             </div>
         );

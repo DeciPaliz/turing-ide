@@ -6,6 +6,7 @@
     font-family: "liberation.ttf";
     font-size: 2rem;
     text-align: center;
+    margin-top: 5px;
     margin-left: 2px;
     margin-right: 2px;
 }
@@ -21,5 +22,9 @@
 }
 
 .EditorNode.null > input {
-    color: #888
+    color: #888;
+}
+
+.EditorNode.start > input {
+    background-color: #9F9;
 }
