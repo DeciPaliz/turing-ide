@@ -26,7 +26,7 @@ export default class BaseToolbarButton extends React.Component<BaseToolbarButton
 
     render() {
         return (
-            <div className={this.className}>
+            <div className="BaseToolbarButton" onClick={this.click}>
                 <img src={this.icon} width="50px" height="50px"></img>
             </div>
         );

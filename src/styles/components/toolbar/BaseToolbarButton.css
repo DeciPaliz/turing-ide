@@ -1,0 +1,3 @@
+.BaseToolbarButton > img {
+    filter: invert(100%) sepia(0%) saturate(7457%) hue-rotate(67deg) brightness(104%) contrast(102%);
+}
