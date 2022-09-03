@@ -1,19 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles/Editor.css';
 
 import EditorNode from './components/editor/EditorNode';
 
-export type EditorProps = {};
-export type EditorState = {};
+export default function Editor() {
+    const [tape, setTape] = useState<Array<string | null>>([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "a", "b", "c", null, null, null, null, null, null, null, null, null, null, null]); 
 
-export default class Editor extends React.Component<EditorProps, EditorState> {
-    
-
-    render() {
-        return (
-            <div className="Editor">
-                <EditorNode />
-            </div>
-        );
-    }
+    return (
+        <div className="Editor">
+            {tape.map((node, index) => 
+                <EditorNode key={index} value={node} />
+            )}
+        </div>
+    );
 }
