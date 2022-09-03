@@ -5,3 +5,9 @@
     padding-left: 10px;
     color: #fff;
 }
+
+@media only screen and (max-device-width: 550px) {
+    .TitleText {
+        display: none
+    }
+}
