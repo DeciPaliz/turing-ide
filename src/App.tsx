@@ -6,8 +6,6 @@ import Toolbar from './Toolbar';
 import Editor from './Editor';
 import ProgramTable from './ProgramTable';
 
-import turing from './model/initialize';
-
 export default class App extends React.Component {
     render() {
         return (
@@ -17,9 +15,5 @@ export default class App extends React.Component {
                 <ProgramTable />
             </div>
         );
-    }
-
-    componentDidMount() {
-        turing.initialize!();
     }
 }

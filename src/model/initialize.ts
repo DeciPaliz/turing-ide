@@ -8,20 +8,19 @@ import parseTable from './functions/parsetable';
 import resources from './config/resources';
 
 // global namespace
-let turing = {
-    initialize: null as (() => void) | null,
-    table: null as Table | null,
+declare global {
+    var turing: any;
+}
 
-    save,
-    exportTable,
-    importTable,
-    parseTable,
+export default function initialize() {
+    globalThis.turing = {
+        table: null as Table | null,
 
-    resources
-};
+        save,
+        exportTable,
+        importTable,
+        parseTable,
 
-turing.initialize = function () {
-    // TODO: load last programtable from localstorage
-};
-
-export default turing;
+        resources
+    };
+}

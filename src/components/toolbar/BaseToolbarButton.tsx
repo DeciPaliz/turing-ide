@@ -1,8 +1,6 @@
 import React from 'react';
 import '../../styles/components/toolbar/BaseToolbarButton.css';
 
-import turing from '../../model/initialize';
-
 export type BaseToolbarButtonProps = {
     onClick?: Function
 };
@@ -11,7 +9,7 @@ export type BaseToolbarButtonState = {};
 
 export default class BaseToolbarButton extends React.Component<BaseToolbarButtonProps, BaseToolbarButtonState> {
     state: BaseToolbarButtonState = {};
-    icon: string = turing.resources.ToolbarButton["default"];
+    icon: string = globalThis.turing.resources.ToolbarButton["default"];
 
     readonly className: string;
 
