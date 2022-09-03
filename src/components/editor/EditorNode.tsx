@@ -30,12 +30,20 @@ export default function EditorNode(props: { value: string | null, onSetStart: Fu
     }
 
     function handleClick(ev: React.MouseEvent) {
+        const target = ev.target as HTMLInputElement;
+        target.setSelectionRange(1, 1);
         if (ev.timeStamp - lastClick <= DOUBLE_CLICK_INTERVAL) {
             // doubleclick
             props.onSetStart();
             setStyle(style + " start");
+            console.log(ev.nativeEvent!.target);
         }
         lastClick = ev.timeStamp;
+    }
+
+    function handleFocus(ev: React.FocusEvent) {
+        const target = ev.target as HTMLInputElement;
+        target.setSelectionRange(1, 1);
     }
 
     useEffect(() => {
@@ -55,6 +63,7 @@ export default function EditorNode(props: { value: string | null, onSetStart: Fu
             <input 
                 onChange={handleChange} 
                 onClick={handleClick}
+                onFocus={handleFocus}
                 value={value} 
                 ref={inputRef}
             />
