@@ -8,16 +8,22 @@ export default function Editor(props: { start: number }) {
     let firstStarts = new Array(tape.length).fill(false);
     firstStarts[props.start] = true;
     const [starts, setStarts] = useState(firstStarts);
-    
+    const [focuses, setFocuses] = useState(new Array(tape.length).fill(false));
 
     function nodeSetStart(index: number) {
         let newStarts = starts.map((_, sIndex) => sIndex === index);
         setStarts(newStarts);
     }
 
+    function nodeInput(index: number, forward: boolean) {
+        index = index + (forward ? 1 : -1);
+        let newFocuses = focuses.map((_, fIndex) => fIndex === index);
+        setFocuses(newFocuses);
+    }
+
     return (
         <div className="Editor">
-            {tape.map((node, index) => <EditorNode key={index} onSetStart={nodeSetStart.bind(null, index)} value={node} start={starts[index]} />)}
+            {tape.map((node, index) => <EditorNode key={index} onSetStart={nodeSetStart.bind(null, index)} onInput={nodeInput.bind(null, index)} value={node} start={starts[index]} focus={focuses[index]} />)}
         </div>
     );
 }

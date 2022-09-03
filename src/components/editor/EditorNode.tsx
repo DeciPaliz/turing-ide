@@ -5,7 +5,7 @@ import '../../styles/components/editor/EditorNode.css';
 const DEFAULT_VALUE = "a₀";
 const DOUBLE_CLICK_INTERVAL = 300;
 
-export default function EditorNode(props: { value: string | null, onSetStart: Function, start: boolean }) {
+export default function EditorNode(props: { value: string | null, onSetStart: Function, onInput: Function, start: boolean, focus: boolean }) {
     const inputRef = useRef(null);
     
     const [value, setValue] = useState(props.value || DEFAULT_VALUE);
@@ -18,12 +18,14 @@ export default function EditorNode(props: { value: string | null, onSetStart: Fu
         if (event.inputType === "deleteContentBackward") {
             setValue(DEFAULT_VALUE);
             setStyle(style + " null");
+            props.onInput(false);
             return;
         }
 
         if (event.inputType === "insertText") {
             setValue(event.data!);
             setStyle(style.replaceAll("null", "").trim());
+            props.onInput(true);
         }
     }
 
@@ -43,6 +45,10 @@ export default function EditorNode(props: { value: string | null, onSetStart: Fu
             setStyle(style.replaceAll("start", "").trim());
         }
     }, [props.start]);
+
+    useEffect(() => {
+        if (props.focus) (inputRef.current! as HTMLInputElement).focus();
+    }, [props.focus]);
 
     return (
         <div className={"EditorNode" + " " + style}>
