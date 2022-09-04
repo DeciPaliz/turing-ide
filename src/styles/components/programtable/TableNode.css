@@ -1,0 +1,46 @@
+:root {
+    --border-none: #8b8a8d;
+    --border-hover: #11a;
+    --outline-none: null;
+    --outline-focus: ;
+    --border-focus: #bbb;
+}
+
+.TableNode {
+    --border: var(--border-none);
+    --outline: var(--outline-none);
+}
+
+.TableNode > input {
+    height: 50px;
+    width: 50px;
+    border: 2px solid var(--border);
+    text-align: center;
+    font-family: Hack;
+    font-size: 1.5rem;
+}
+
+.tablenode-left {
+    border-radius: 8px 0 0 8px;
+}
+
+.tablenode-center {
+    transform: translateX(-2px);
+}
+
+.tablenode-right {
+    border-radius: 0 8px 8px 0;
+    transform: translateX(-4px);
+}
+
+.TableNode:hover {
+    --border: var(--border-hover);
+}
+
+.TableNode > input:focus {
+    --border: var(--border-focus);
+    outline: 4px solid #ccf;
+    caret-color: transparent;
+    position: relative;
+    z-index: 1;
+}

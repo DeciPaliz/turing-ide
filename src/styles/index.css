@@ -1,3 +1,15 @@
+@font-face 
+{ 
+    font-family: "Liberation";  
+    src: url("../../public/liberation.ttf"); 
+}
+
+@font-face 
+{ 
+    font-family: "Hack";  
+    src: url("../../public/hack.ttf"); 
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

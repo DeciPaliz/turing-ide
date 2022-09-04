@@ -1,5 +1,5 @@
-.EditorNode > input {
-    width: 50px;
+.BaseTableNode > input {
+    width: 100px;
     height: 50px;
     border: 2px solid #8b8a8d;
     border-radius: 8px;
@@ -11,20 +11,20 @@
     margin-right: 2px;
 }
 
-.EditorNode > input:hover {
+.BaseTableNode > input:hover {
     border-color: #11a;
 }
 
-.EditorNode > input:focus {
+.BaseTableNode > input:focus {
     outline: 4px solid #ccf;
     border: 2px solid #bbb;
     caret-color: transparent;
 }
 
-.EditorNode.null > input {
+.BaseTableNode.null > input {
     color: #888;
 }
 
-.EditorNode.start > input {
+.BaseTableNode.start > input {
     background-color: #9F9;
 }
