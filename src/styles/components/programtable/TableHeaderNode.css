@@ -1,0 +1,20 @@
+.TableHeaderNode > input {
+    width: 162px;
+    height: 50px;
+    border: 2px solid #8b8a8d;
+    text-align: center;
+    font-family: Hack;
+    font-size: 1.5rem;
+    border-radius: 8px;
+}
+
+.TableHeaderNode > input:hover {
+    border-color: #11a;
+}
+
+.TableHeaderNode > input:focus {
+    outline: 4px solid #ccf;
+    border: 2px solid #bbb;
+    caret-color: transparent;
+    position: relative;
+}

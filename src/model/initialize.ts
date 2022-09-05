@@ -6,7 +6,10 @@ import exportTable from './functions/exporttable';
 import importTable from './functions/importtable';
 import parseTable from './functions/parsetable';
 
+import convertToSubscript from './functions/converttosubscript';
+
 import resources from './config/resources';
+import subscripts from './config/subscripts';
 
 // global namespace
 declare global {
@@ -22,7 +25,9 @@ export default function initialize() {
             save,
             exportTable,
             importTable,
-            parseTable
+            parseTable,
+
+            convertToSubscript
         },
 
         resources,
@@ -31,7 +36,9 @@ export default function initialize() {
             EMPTY_SYMBOL,
             DEFAULT_TABLE,
             DEFAULT_TAPE,
-            DOUBLE_CLICK_INTERVAL: 300
+            DOUBLE_CLICK_INTERVAL: 300,
+
+            subscripts
         }
     };
 }
