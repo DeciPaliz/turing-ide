@@ -7,7 +7,7 @@ import TableHeaderNode from './components/programtable/TableHeaderNode';
 export default function ProgramTable() {
     return (
         <div className="ProgramTable">
-            <TableNode />
+            <TableNode programState={1} inputs={{}} />
             <TableHeaderNode index={50} />
         </div>
     );
