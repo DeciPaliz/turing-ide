@@ -9,17 +9,25 @@ export default function TableNode(props: { programState: number, inputs: TableNo
     let centerRef = useRef(null);
     let rightRef = useRef(null);
 
+    const [leftStyles, setLeftStyles] = useState("");
+    const [centerStyles, setCenterStyles] = useState("");
+    const [rightStyles, setRightStyles] = useState("");
+
     const EMPTY_SYMBOL = globalThis.turing.config.EMPTY_SYMBOL;
 
-    props.inputs.symbol = props.inputs.symbol || EMPTY_SYMBOL;
-    props.inputs.programState = props.inputs.programState || props.programState;
-    props.inputs.direction = props.inputs.direction || "Н!";
+    const LEFT_DEFAULT = EMPTY_SYMBOL;
+    const CENTER_DEFAULT = props.programState;
+    const RIGHT_DEFAULT = "Н!";
+
+    props.inputs.symbol = props.inputs.symbol || LEFT_DEFAULT;
+    props.inputs.programState = props.inputs.programState || CENTER_DEFAULT;
+    props.inputs.direction = props.inputs.direction || RIGHT_DEFAULT;
 
     return (
         <div className="TableNode">
-            <input className="tablenode-left" ref={leftRef} value={props.inputs.symbol} />
-            <input className="tablenode-center" ref={centerRef} value={"q" + globalThis.turing.utils.convertToSubscript(props.inputs.programState)} />
-            <input className="tablenode-right" ref={rightRef} value={props.inputs.direction} />
+            <input className={"tablenode-left " + (props.inputs.symbol === LEFT_DEFAULT ? "default" : "")} ref={leftRef} value={props.inputs.symbol} />
+            <input className={"tablenode-center " + (props.inputs.programState === CENTER_DEFAULT ? "default" : "")} ref={centerRef} value={"q" + globalThis.turing.utils.convertToSubscript(props.inputs.programState)} />
+            <input className={"tablenode-right " + (props.inputs.direction === RIGHT_DEFAULT ? "default" : "")} ref={rightRef} value={props.inputs.direction} />
         </div>
     );
 }
