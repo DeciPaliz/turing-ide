@@ -8,6 +8,10 @@ import parseTable from './functions/parsetable';
 
 import convertToSubscript from './functions/converttosubscript';
 
+import { addState, removeState } from './functions/table/buttons';
+
+import { setValue, setStart } from './functions/tape/editor';
+
 import resources from './config/resources';
 import subscripts from './config/subscripts';
 
@@ -18,8 +22,8 @@ declare global {
 
 export default function initialize() {
     globalThis.turing = {
-        table: null as Table | null,
-        tape: null as Tape | null,
+        table: DEFAULT_TABLE as Table,
+        tape: DEFAULT_TAPE as Tape,
 
         utils: {
             save,
@@ -27,7 +31,17 @@ export default function initialize() {
             importTable,
             parseTable,
 
-            convertToSubscript
+            convertToSubscript,
+
+            table: {
+                addState,
+                removeState
+            },
+
+            tape: {
+                setValue,
+                setStart
+            }
         },
 
         resources,
@@ -41,4 +55,11 @@ export default function initialize() {
             subscripts
         }
     };
+
+    // DEBUG
+    globalThis.turing.table.nodes = new Array(10).fill(null).map((_, i) => {
+        return new Array(10).fill(null).map((_, j) => {
+            return {};
+        });
+    });
 }

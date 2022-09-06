@@ -1,5 +1,6 @@
 .TableHeader {
     display: flex;
+    margin-left: 62px;
 }
 
 .TableHeader > div {

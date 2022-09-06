@@ -3,10 +3,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import '../../styles/components/programtable/TableRow.css';
 
 import TableNode from './TableNode';
+import TableSymbol from './TableSymbol';
 
-export default function TableRow(props: { cols: number }) {
+export default function TableRow(props: { symbol: string, row: number, cols: number }) {
     return (
         <div className="TableRow">
+            <TableSymbol value={props.symbol} />
             {new Array(props.cols).fill(null).map((_, i) => <TableNode key={i+1} programState={i+1} inputs={{}} />)}
         </div>
     );

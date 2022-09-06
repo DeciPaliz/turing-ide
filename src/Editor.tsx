@@ -23,7 +23,7 @@ export default function Editor() {
 
     return (
         <div className="Editor">
-            {tape.map((node, index) => <EditorNode key={index} onSetStart={nodeSetStart.bind(null, index)} onInput={nodeInput.bind(null, index)} value={node} start={starts[index]} focus={focuses[index]} />)}
+            {tape.map((node, index) => <EditorNode key={index} index={index} onSetStart={nodeSetStart.bind(null, index)} onInput={nodeInput.bind(null, index)} focus={focuses[index]} />)}
         </div>
     );
 }
