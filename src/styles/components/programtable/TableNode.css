@@ -2,13 +2,13 @@
     --border-none: #8b8a8d;
     --border-hover: #11a;
     --outline-none: null;
-    --outline-focus: ;
     --border-focus: #bbb;
 }
 
 .TableNode {
     --border: var(--border-none);
     --outline: var(--outline-none);
+    display: flex;
 }
 
 .TableNode > input {

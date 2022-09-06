@@ -1,14 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './styles/ProgramTable.css';
 
-import TableNode from './components/programtable/TableNode';
-import TableHeaderNode from './components/programtable/TableHeaderNode';
+import TableRow from './components/programtable/TableRow';
+import TableHeader from './components/programtable/TableHeader';
 
 export default function ProgramTable() {
     return (
         <div className="ProgramTable">
-            <TableNode programState={1} inputs={{}} />
-            <TableHeaderNode index={50} />
+            <TableRow cols={10} />
+            <TableHeader cols={10} />
         </div>
     );
 }

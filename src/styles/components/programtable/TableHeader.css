@@ -1,0 +1,7 @@
+.TableHeader {
+    display: flex;
+}
+
+.TableHeader > div {
+    padding-right: 4px;
+}

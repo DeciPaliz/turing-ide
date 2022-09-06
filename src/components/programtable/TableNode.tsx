@@ -10,7 +10,7 @@ enum TableNodeInputType {
     right
 };
 
-export default function TableNode(props: { programState: number, inputs: TableNodeInputs }) {
+export default function TableNode(props: { programState: number, getInputs?: Function, inputs: TableNodeInputs }) {
     let leftRef = useRef(null);
     let centerRef = useRef(null);
     let rightRef = useRef(null);
@@ -87,7 +87,6 @@ export default function TableNode(props: { programState: number, inputs: TableNo
                     return;
             }
         }
-        
     }
 
     function handleFocus(ev: React.FocusEvent) {
