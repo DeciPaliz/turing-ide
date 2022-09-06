@@ -53,7 +53,7 @@ export default function TableNode(props: { programState: number, inputs: TableNo
             }
         }
         if (event.inputType === "insertText") {
-            const key = event.data;
+            const key = event.data as string;
             console.log(key);
             if (!key) return;
             switch (input) {
@@ -62,6 +62,7 @@ export default function TableNode(props: { programState: number, inputs: TableNo
                     target.setSelectionRange(1, 1);
                     return;
                 case TableNodeInputType.center:
+                    if (["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].indexOf(key) === -1) return;
                     if (defaultState) {
                         setProgramState(Number(key));
                         setDefaultState(false);
