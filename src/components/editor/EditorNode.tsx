@@ -8,9 +8,7 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
     const EMPTY_SYMBOL = globalThis.turing.config.EMPTY_SYMBOL;
     const DOUBLE_CLICK_INTERVAL = globalThis.turing.config.DOUBLE_CLICK_INTERVAL;
     
-    const tape = globalThis.turing.tape;
-    const [style, setStyle] = useState((tape.nodes[props.index] ? "" : " null") + (tape.start === props.index ? " start" : ""));
-    const [symbol, setSymbol] = useState(null);
+    const [symbol, setSymbol] = useState(null as string | null);
 
     let lastClick: number = 0;
 
@@ -18,14 +16,14 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
         const event = ev.nativeEvent as InputEvent;
         if (event.inputType === "deleteContentBackward") {
             globalThis.turing.utils.tape.setValue(props.index, null);
-            setStyle(style + " null");
+            setSymbol(null);
             props.onInput(false);
             return;
         }
 
         if (event.inputType === "insertText") {
             globalThis.turing.utils.tape.setValue(props.index, event.data!);
-            setStyle(style.replaceAll("null", "").trim());
+            setSymbol(event.data!);
             props.onInput(true);
         }
     }
@@ -37,7 +35,6 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
             // doubleclick
             props.onSetStart();
             globalThis.turing.utils.tape.setStart(props.index);
-            setStyle(style + " start");
         }
         lastClick = ev.timeStamp;
     }
@@ -62,6 +59,7 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
 
         globalThis.turing.utils.tape.subscriptions.tapeListeners.push(() => {
             const node = globalThis.turing.tape.nodes[props.index];
+            console.log(symbol, node);
             if (symbol !== node) {
                 setSymbol(node);
             }

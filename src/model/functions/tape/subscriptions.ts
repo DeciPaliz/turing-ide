@@ -1,7 +1,7 @@
-export let tapeListeners: Array<Function> = [];
+export let tapeListeners: Array<Function | undefined> = [];
 
 export function invokeTapeListeners() {
-    globalThis.turing.utils.tape.subscriptions.tapeListeners.forEach(function (listener: Function) { 
-        listener()
+    globalThis.turing.utils.tape.subscriptions.tapeListeners.forEach(function (listener: Function | undefined) { 
+        if (listener) listener();
     });
 }

@@ -29,6 +29,8 @@ export default function TableNode(props: { row: number, col: number, programStat
 
     const onTableNodeChange = globalThis.turing.utils.table.subscriptions.onTableNodeChange.bind(null, props.row, props.col);
 
+    let subscriptionIndex: number | null = null;
+
     function handleChange(input: TableNodeInputType, ev: React.ChangeEvent) {
         const event = ev.nativeEvent as InputEvent;
         const target = ev.target as HTMLInputElement;
@@ -106,7 +108,8 @@ export default function TableNode(props: { row: number, col: number, programStat
     }
 
     useEffect(() => {
-        globalThis.turing.utils.table.subscriptions.tableListeners.push(() => {
+        subscriptionIndex = globalThis.turing.utils.table.subscriptions.tableListeners.push(() => {
+            if (!globalThis.turing.table.nodes[props.row] || !globalThis.turing.table.nodes[props.row][props.col]) return;
             const node = globalThis.turing.table.nodes[props.row][props.col];
             if (node.symbol !== symbol) {
                 setSymbol(node.symbol || LEFT_DEFAULT);
@@ -122,7 +125,11 @@ export default function TableNode(props: { row: number, col: number, programStat
             if (node.direction !== direction) {
                 setDirection(node.direction || RIGHT_DEFAULT);
             }
-        });
+        }) - 1;
+
+        return () => {
+            globalThis.turing.utils.table.subscriptions.tableListeners[subscriptionIndex!] = undefined;
+        };
     }, []);
 
     return (

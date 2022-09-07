@@ -79,4 +79,13 @@ export default function initialize() {
     });
 
     globalThis.turing.table.alphabet = [EMPTY_SYMBOL, "a", "b", "c", "d", "e", "f", "g", "h", "i"];
+
+    // is this rational?
+    globalThis.turing.utils.tape.subscriptions.tapeListeners.push(() => {
+        save();
+    });
+
+    globalThis.turing.utils.table.subscriptions.tableListeners.push(() => {
+        save();
+    });
 }
