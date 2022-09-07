@@ -1,3 +1,7 @@
 .BaseToolbarButton > img {
     filter: invert(100%) sepia(0%) saturate(7457%) hue-rotate(67deg) brightness(104%) contrast(102%);
 }
+
+.BaseToolbarButton > img:active {
+    filter: invert(0%) sepia(85%) saturate(6907%) hue-rotate(33deg) brightness(84%) contrast(113%);
+}

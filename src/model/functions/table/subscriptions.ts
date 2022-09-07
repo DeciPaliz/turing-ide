@@ -14,9 +14,9 @@ export function onTableNodeChange(row: number, col: number, value: { type: "symb
     }
 }
 
-export let updateTableListeners: Array<Function> = [];
+export let tableListeners: Array<Function> = [];
 
 export function invokeTableListeners() {
-    const listeners: Array<Function> = globalThis.turing.utils.table.subscriptions.updateTableListeners;
+    const listeners: Array<Function> = globalThis.turing.utils.table.subscriptions.tableListeners;
     listeners.forEach((listener) => listener());
 }

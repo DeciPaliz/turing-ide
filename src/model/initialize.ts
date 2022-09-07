@@ -2,16 +2,17 @@ import Table, { EMPTY_SYMBOL, DEFAULT_TABLE } from './types/table';
 import Tape, { DEFAULT_TAPE } from './types/tape';
 
 import save from './functions/save';
+import load from './functions/load';
 import exportTable from './functions/exporttable';
 import importTable from './functions/importtable';
-import parseTable from './functions/parsetable';
 
 import convertToSubscript from './functions/converttosubscript';
 
 import { addState, removeState, addSymbolRow, removeSymbolRow } from './functions/table/buttons';
-import { onTableNodeChange, updateTableListeners, invokeTableListeners } from './functions/table/subscriptions';
+import { onTableNodeChange, tableListeners, invokeTableListeners } from './functions/table/subscriptions';
 
 import { setValue, setStart } from './functions/tape/editor';
+import { tapeListeners, invokeTapeListeners } from './functions/tape/subscriptions';
 
 import resources from './config/resources';
 import subscripts from './config/subscripts';
@@ -28,9 +29,9 @@ export default function initialize() {
 
         utils: {
             save,
+            load,
             exportTable,
             importTable,
-            parseTable,
 
             convertToSubscript,
 
@@ -42,14 +43,19 @@ export default function initialize() {
 
                 subscriptions: {
                     onTableNodeChange,
-                    updateTableListeners,
+                    tableListeners,
                     invokeTableListeners
                 }
             },
 
             tape: {
                 setValue,
-                setStart
+                setStart,
+                
+                subscriptions: {
+                    tapeListeners,
+                    invokeTapeListeners
+                }
             }
         },
 
@@ -71,4 +77,6 @@ export default function initialize() {
             return {};
         });
     });
+
+    globalThis.turing.table.alphabet = [EMPTY_SYMBOL, "a", "b", "c", "d", "e", "f", "g", "h", "i"];
 }

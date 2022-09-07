@@ -9,7 +9,7 @@ export default function TableHeader() {
     const [cols, setCols] = useState(0);
 
     useEffect(() => {
-        globalThis.turing.utils.table.subscriptions.updateTableListeners.push(function () {
+        globalThis.turing.utils.table.subscriptions.tableListeners.push(function () {
             console.log(globalThis.turing.table.nodes[0].length);
             if (globalThis.turing.table.nodes[0].length !== cols) setCols(globalThis.turing.table.nodes[0].length);
         });

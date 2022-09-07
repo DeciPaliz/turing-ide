@@ -1,3 +1,4 @@
 .ExportButton {
     grid-area: export;
+    filter: invert(60%) sepia(0%) saturate(643%) hue-rotate(215deg) brightness(90%) contrast(81%);
 }

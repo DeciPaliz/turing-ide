@@ -106,7 +106,23 @@ export default function TableNode(props: { row: number, col: number, programStat
     }
 
     useEffect(() => {
-        
+        globalThis.turing.utils.table.subscriptions.tableListeners.push(() => {
+            const node = globalThis.turing.table.nodes[props.row][props.col];
+            if (node.symbol !== symbol) {
+                setSymbol(node.symbol || LEFT_DEFAULT);
+            }
+            if (node.programState !== programState) {
+                setProgramState(node.programState || CENTER_DEFAULT);
+                if (node.programState) {
+                    setDefaultState(false);
+                } else {
+                    setDefaultState(true);
+                }
+            }
+            if (node.direction !== direction) {
+                setDirection(node.direction || RIGHT_DEFAULT);
+            }
+        });
     }, []);
 
     return (

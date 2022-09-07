@@ -10,6 +10,7 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
     
     const tape = globalThis.turing.tape;
     const [style, setStyle] = useState((tape.nodes[props.index] ? "" : " null") + (tape.start === props.index ? " start" : ""));
+    const [symbol, setSymbol] = useState(null);
 
     let lastClick: number = 0;
 
@@ -58,15 +59,22 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
             console.log(target);
             target.parentElement!.parentElement!.scrollLeft = target.parentElement!.offsetLeft - window.innerWidth / 2 + target.parentElement!.offsetWidth / 2;
         }
+
+        globalThis.turing.utils.tape.subscriptions.tapeListeners.push(() => {
+            const node = globalThis.turing.tape.nodes[props.index];
+            if (symbol !== node) {
+                setSymbol(node);
+            }
+        });
     }, []);
 
     return (
-        <div className={"EditorNode" + " " + (props.index === globalThis.turing.tape.start ? "start" : "") + " " + (globalThis.turing.tape.nodes[props.index] ? "" : "null")}>
+        <div className={"EditorNode" + " " + (props.index === globalThis.turing.tape.start ? "start" : "") + " " + (symbol ? "" : "null")}>
             <input 
                 onChange={handleChange} 
                 onClick={handleClick}
                 onFocus={handleFocus}
-                value={globalThis.turing.tape.nodes[props.index] || EMPTY_SYMBOL} 
+                value={symbol || EMPTY_SYMBOL} 
                 ref={inputRef}
             />
         </div>

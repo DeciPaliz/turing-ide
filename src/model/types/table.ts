@@ -1,12 +1,12 @@
 type Table = {
     nodes: Array<Array<ProgramNode>>,      // index is the state
-    alphabet: Array<string>,               // index is the "symbol" --\
-    comments: Array<string>                //                         |
-};                                         //                         |
-                                           //                         |
-export type ProgramNode = {                //                         |
-    symbol: number | undefined,            // <-----------------------/
-    state: number | undefined,
+    alphabet: Array<string>,               // index is the row
+    comments: Array<string>
+};
+
+export type ProgramNode = {
+    symbol: string | undefined,
+    programState: number | undefined,
     direction: "Л" | "П" | "Н!" | undefined
 };
 

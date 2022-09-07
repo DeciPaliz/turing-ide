@@ -11,7 +11,7 @@ export default function ProgramTable() {
     const [cols, setCols] = useState(0);
 
     useEffect(() => {
-        globalThis.turing.utils.table.subscriptions.updateTableListeners.push(function () {
+        globalThis.turing.utils.table.subscriptions.tableListeners.push(function () {
             const table = globalThis.turing.table;
             if (table.nodes.length !== rows) setRows(table.nodes.length);
             if (table.nodes[0].length !== cols) setCols(table.nodes[0].length);
