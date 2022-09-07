@@ -127,6 +127,8 @@ export default function TableNode(props: { row: number, col: number, programStat
             }
         }) - 1;
 
+        globalThis.turing.utils.table.subscriptions.tableListeners[subscriptionIndex]();
+
         return () => {
             globalThis.turing.utils.table.subscriptions.tableListeners[subscriptionIndex!] = undefined;
         };

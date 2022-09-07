@@ -6,5 +6,7 @@ export default class RunButton extends BaseToolbarButton {
         super(props, "RunButton");
     }
 
-    override click() {};
+    override click() {
+        globalThis.turing.utils.save();
+    };
 }

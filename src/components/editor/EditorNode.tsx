@@ -53,13 +53,11 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
     useEffect(() => {
         if (props.index === globalThis.turing.tape.start) {
             const target = inputRef.current! as HTMLInputElement;
-            console.log(target);
             target.parentElement!.parentElement!.scrollLeft = target.parentElement!.offsetLeft - window.innerWidth / 2 + target.parentElement!.offsetWidth / 2;
         }
 
         globalThis.turing.utils.tape.subscriptions.tapeListeners.push(() => {
             const node = globalThis.turing.tape.nodes[props.index];
-            console.log(symbol, node);
             if (symbol !== node) {
                 setSymbol(node);
             }

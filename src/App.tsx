@@ -8,6 +8,7 @@ import ProgramTable from './ProgramTable';
 
 export default function App() {
     useEffect(() => {
+        globalThis.turing.utils.load();
         globalThis.turing.utils.table.subscriptions.invokeTableListeners();
     }, []);
 

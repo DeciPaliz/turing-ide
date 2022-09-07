@@ -70,22 +70,4 @@ export default function initialize() {
             subscripts
         }
     };
-
-    // DEBUG
-    globalThis.turing.table.nodes = new Array(10).fill(null).map((_, i) => {
-        return new Array(10).fill(null).map((_, j) => {
-            return {};
-        });
-    });
-
-    globalThis.turing.table.alphabet = [EMPTY_SYMBOL, "a", "b", "c", "d", "e", "f", "g", "h", "i"];
-
-    // is this rational?
-    globalThis.turing.utils.tape.subscriptions.tapeListeners.push(() => {
-        save();
-    });
-
-    globalThis.turing.utils.table.subscriptions.tableListeners.push(() => {
-        save();
-    });
 }
