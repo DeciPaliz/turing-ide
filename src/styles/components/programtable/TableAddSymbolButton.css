@@ -1,0 +1,15 @@
+.TableAddSymbolButton {
+    display: flex;
+    flex-direction: column;
+}
+
+.TableAddSymbolButton > input {
+    width: 58px;
+    height: 58px;
+    border: 2px solid #8b8a8d;
+    border-radius: 8px;
+    font-family: "Hack";
+    font-size: 2rem;
+    text-align: center;
+    margin-right: 2px;
+}

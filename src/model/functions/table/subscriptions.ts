@@ -13,3 +13,10 @@ export function onTableNodeChange(row: number, col: number, value: { type: "symb
             break;
     }
 }
+
+export let updateTableListeners: Array<Function> = [];
+
+export function invokeTableListeners() {
+    const listeners: Array<Function> = globalThis.turing.utils.table.subscriptions.updateTableListeners;
+    listeners.forEach((listener) => listener());
+}

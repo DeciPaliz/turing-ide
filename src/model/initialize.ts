@@ -8,8 +8,8 @@ import parseTable from './functions/parsetable';
 
 import convertToSubscript from './functions/converttosubscript';
 
-import { addState, removeState } from './functions/table/buttons';
-import { onTableNodeChange } from './functions/table/subscriptions';
+import { addState, removeState, addSymbolRow, removeSymbolRow } from './functions/table/buttons';
+import { onTableNodeChange, updateTableListeners, invokeTableListeners } from './functions/table/subscriptions';
 
 import { setValue, setStart } from './functions/tape/editor';
 
@@ -37,9 +37,13 @@ export default function initialize() {
             table: {
                 addState,
                 removeState,
+                addSymbolRow,
+                removeSymbolRow,
 
                 subscriptions: {
-                    onTableNodeChange
+                    onTableNodeChange,
+                    updateTableListeners,
+                    invokeTableListeners
                 }
             },
 
