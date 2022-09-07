@@ -9,7 +9,7 @@ export default function TableRow(props: { symbol: string, row: number, cols: num
     return (
         <div className="TableRow">
             <TableSymbol value={props.symbol} />
-            {new Array(props.cols).fill(null).map((_, i) => <TableNode key={i+1} programState={i+1} inputs={{}} />)}
+            {new Array(props.cols).fill(null).map((_, i) => <TableNode row={props.row} col={i} key={i+1} programState={i+1} inputs={{}} />)}
         </div>
     );
 }

@@ -9,6 +9,7 @@ import parseTable from './functions/parsetable';
 import convertToSubscript from './functions/converttosubscript';
 
 import { addState, removeState } from './functions/table/buttons';
+import { onTableNodeChange } from './functions/table/subscriptions';
 
 import { setValue, setStart } from './functions/tape/editor';
 
@@ -35,7 +36,11 @@ export default function initialize() {
 
             table: {
                 addState,
-                removeState
+                removeState,
+
+                subscriptions: {
+                    onTableNodeChange
+                }
             },
 
             tape: {

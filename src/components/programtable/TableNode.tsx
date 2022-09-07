@@ -10,7 +10,7 @@ enum TableNodeInputType {
     right
 };
 
-export default function TableNode(props: { programState: number, getInputs?: Function, inputs: TableNodeInputs }) {
+export default function TableNode(props: { row: number, col: number, programState: number, getInputs?: Function, inputs: TableNodeInputs }) {
     let leftRef = useRef(null);
     let centerRef = useRef(null);
     let rightRef = useRef(null);
@@ -27,6 +27,8 @@ export default function TableNode(props: { programState: number, getInputs?: Fun
 
     const [defaultState, setDefaultState] = useState(programState === CENTER_DEFAULT);
 
+    const onTableNodeChange = globalThis.turing.utils.table.subscriptions.onTableNodeChange.bind(null, props.row, props.col);
+
     function handleChange(input: TableNodeInputType, ev: React.ChangeEvent) {
         const event = ev.nativeEvent as InputEvent;
         const target = ev.target as HTMLInputElement;
@@ -34,6 +36,7 @@ export default function TableNode(props: { programState: number, getInputs?: Fun
             switch (input) {
                 case TableNodeInputType.left:
                     setSymbol(LEFT_DEFAULT);
+                    onTableNodeChange({ type: "symbol", data: LEFT_DEFAULT });
                     target.setSelectionRange(1, 1);
                     return;
                 case TableNodeInputType.center:
@@ -44,10 +47,12 @@ export default function TableNode(props: { programState: number, getInputs?: Fun
                         setDefaultState(true);
                     }
                     setProgramState(newProgramState);
+                    onTableNodeChange({ type: "state", data: newProgramState });
                     target.setSelectionRange(1, 1);
                     return;
                 case TableNodeInputType.right:
                     setDirection(RIGHT_DEFAULT);
+                    onTableNodeChange({ type: "direction", data: RIGHT_DEFAULT });
                     target.setSelectionRange(1, 1);
                     return;
             }
@@ -59,29 +64,35 @@ export default function TableNode(props: { programState: number, getInputs?: Fun
             switch (input) {
                 case TableNodeInputType.left:
                     setSymbol(key);
+                    onTableNodeChange({ type: "symbol", data: key });
                     target.setSelectionRange(1, 1);
                     return;
                 case TableNodeInputType.center:
                     if (["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].indexOf(key) === -1) return;
                     if (defaultState) {
                         setProgramState(Number(key));
+                        onTableNodeChange({ type: "state", data: Number(key) });
                         setDefaultState(false);
                     } else {
                         setProgramState(Number(String(programState) + key));
+                        onTableNodeChange({ type: "state", data: Number(String(programState) + key) });
                     }
                     target.setSelectionRange(1, 1);
                     return;
                 case TableNodeInputType.right:
                     if (["l", "L", "k", "K", "л", "Л"].indexOf(key) !== -1) {
                         setDirection("Л");
+                        onTableNodeChange({ type: "direction", data: "Л" });
                         return;
                     }
                     if (["r", "R", "g", "G", "п", "П"].indexOf(key) !== -1) {
                         setDirection("П");
+                        onTableNodeChange({ type: "direction", data: "П" });
                         return;
                     }
                     if (["n", "N", "y", "Y", "н", "Н", "!"].indexOf(key) !== -1) {
                         setDirection("Н!");
+                        onTableNodeChange({ type: "direction", data: "Н!" });
                         return;
                     }
                     return;
@@ -93,6 +104,10 @@ export default function TableNode(props: { programState: number, getInputs?: Fun
         const target = ev.target! as HTMLInputElement;
         target.setSelectionRange(1, 1);
     }
+
+    useEffect(() => {
+        
+    }, []);
 
     return (
         <div className="TableNode">
