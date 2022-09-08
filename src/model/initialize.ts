@@ -14,6 +14,8 @@ import { onTableNodeChange, tableListeners, invokeTableListeners } from './funct
 import { setValue, setStart } from './functions/tape/editor';
 import { tapeListeners, invokeTapeListeners } from './functions/tape/subscriptions';
 
+import { step, run, runnerState } from './runner';
+
 import resources from './config/resources';
 import subscripts from './config/subscripts';
 
@@ -57,6 +59,12 @@ export default function initialize() {
                     invokeTapeListeners
                 }
             }
+        },
+
+        runner: {
+            step,
+            run,
+            runnerState
         },
 
         resources,
