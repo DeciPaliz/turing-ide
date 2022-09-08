@@ -18,6 +18,7 @@ import { step, run, runnerState } from './runner';
 
 import resources from './config/resources';
 import subscripts from './config/subscripts';
+import MAX_ITERATIONS from './config/runner';
 
 // global namespace
 declare global {
@@ -74,6 +75,7 @@ export default function initialize() {
             DEFAULT_TABLE,
             DEFAULT_TAPE,
             DOUBLE_CLICK_INTERVAL: 300,
+            MAX_ITERATIONS,
 
             subscripts
         }

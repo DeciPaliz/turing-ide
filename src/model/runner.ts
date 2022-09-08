@@ -55,5 +55,12 @@ export function step(): StepResult {
 
 export function run() {
     let result = StepResult.CONTINUE;
-    while (result !== StepResult.TERMINATED) result = globalThis.turing.runner.step();
+    let iteration: number = 0;
+    while (result !== StepResult.TERMINATED && iteration < globalThis.turing.config.MAX_ITERATIONS) {
+        result = globalThis.turing.runner.step();
+        iteration++;
+    }
+    if (iteration === globalThis.turing.config.MAX_ITERATIONS) {
+        // TODO: display warning
+    }
 }

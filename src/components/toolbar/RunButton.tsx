@@ -8,5 +8,6 @@ export default class RunButton extends BaseToolbarButton {
 
     override click() {
         globalThis.turing.utils.save();
+        globalThis.turing.runner.run();
     };
 }
