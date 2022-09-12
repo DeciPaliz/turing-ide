@@ -16,9 +16,12 @@ import { tapeListeners, invokeTapeListeners } from './functions/tape/subscriptio
 
 import { step, run, runnerState } from './runner';
 
+import notification from './notification';
+
 import resources from './config/resources';
 import subscripts from './config/subscripts';
 import MAX_ITERATIONS from './config/runner';
+import { NOTIFICATION_DELAY, NOTIFICATION_INTERVAL } from './config/notification';
 
 // global namespace
 declare global {
@@ -68,6 +71,8 @@ export default function initialize() {
             runnerState
         },
 
+        notification,
+
         resources,
 
         config: {
@@ -76,8 +81,11 @@ export default function initialize() {
             DEFAULT_TAPE,
             DOUBLE_CLICK_INTERVAL: 300,
             MAX_ITERATIONS,
+            NOTIFICATION_DELAY,
+            NOTIFICATION_INTERVAL,
 
             subscripts
         }
     };
+    setInterval(turing.notification.intervalHandler, turing.config.NOTIFICATION_INTERVAL);
 }

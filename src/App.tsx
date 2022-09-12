@@ -5,6 +5,7 @@ import './styles/App.css';
 import Toolbar from './Toolbar';
 import Editor from './Editor';
 import ProgramTable from './ProgramTable';
+import NotificationView from './NotificationView';
 
 export default function App() {
     useEffect(() => {
@@ -17,6 +18,7 @@ export default function App() {
             <Toolbar />
             <Editor />
             <ProgramTable />
+            <NotificationView />
         </div>
     );
 }

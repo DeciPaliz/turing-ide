@@ -1,0 +1,3 @@
+export const NOTIFICATION_DELAY = 300;
+
+export const NOTIFICATION_INTERVAL = 100;
