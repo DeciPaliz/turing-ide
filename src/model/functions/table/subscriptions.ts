@@ -1,17 +1,8 @@
 export function onTableNodeChange(row: number, col: number, value: { type: "symbol" | "state" | "direction", data: string | number | null }) {
     let table = globalThis.turing.table;
-    while (!table.nodes[row]) {
-        table.nodes.push(new Array(table.nodes[0].length).fill(null).map(() => { return {}; }));
+    if (table.nodes[row][col] === undefined) {
+        table.nodes[row][col] = {};
     }
-    console.log("rows terminated");
-    console.log(col);
-    console.log(table.nodes[row][col]);
-    while (table.nodes[row][col] === undefined) {
-        table.nodes.forEach(function (nodesRow: Array<object>) {
-            nodesRow.push({});
-        });
-    }
-    if (!table.nodes[row][col]) table.nodes[row][col] = {};
     switch (value.type) {
         case "symbol":
             table.nodes[row][col].symbol = value.data;
@@ -31,5 +22,15 @@ export function invokeTableListeners() {
     const listeners: Array<Function | undefined> = globalThis.turing.utils.table.subscriptions.tableListeners;
     listeners.forEach(function (listener: Function | undefined) {
         if (listener) listener();
+    });
+}
+
+function replaceUndefined() {
+    const table = globalThis.turing.table;
+    globalThis.turing.table = table.nodes.map((row: Array<object>) => {
+        return row.map((node?: object) => {
+            if (!node && typeof(node) !== "object") return {};
+            else return node;
+        });
     });
 }
