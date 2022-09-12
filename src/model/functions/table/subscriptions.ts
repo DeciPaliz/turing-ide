@@ -24,13 +24,3 @@ export function invokeTableListeners() {
         if (listener) listener();
     });
 }
-
-function replaceUndefined() {
-    const table = globalThis.turing.table;
-    globalThis.turing.table = table.nodes.map((row: Array<object>) => {
-        return row.map((node?: object) => {
-            if (!node && typeof(node) !== "object") return {};
-            else return node;
-        });
-    });
-}
