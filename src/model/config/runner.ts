@@ -1,2 +1,2 @@
-const MAX_ITERATIONS = 1<<20;
+const MAX_ITERATIONS = 1<<18;
 export default MAX_ITERATIONS;

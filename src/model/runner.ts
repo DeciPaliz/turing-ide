@@ -1,6 +1,6 @@
 export let runnerState = {
-    pointer: null as number | null,
-    programState: null as number | null
+    pointer: undefined as number | undefined,
+    programState: undefined as number | undefined
 };
 
 enum StepResult {
@@ -60,7 +60,10 @@ export function run() {
         result = globalThis.turing.runner.step();
         iteration++;
     }
+    turing.runner.runnerState = {};
     if (iteration === globalThis.turing.config.MAX_ITERATIONS) {
-        // TODO: display warning
+        turing.notification.showNotification("Внимание!", "Ваша программа слишком долго выполняется. Возможен бесконечный цикл.", { urgent: true });
+    } else {
+        turing.notification.showNotification("Завершено", `Программа завершена после ${iteration} шагов.`);
     }
 }
