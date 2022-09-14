@@ -6,5 +6,7 @@ export default class ExportButton extends BaseToolbarButton {
         super(props, "ExportButton");
     }
 
-    override click() {}
+    override click() {
+        turing.utils.exportTable();
+    }
 }

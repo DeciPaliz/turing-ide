@@ -13,8 +13,22 @@ export default function App() {
         globalThis.turing.utils.table.subscriptions.invokeTableListeners();
     }, []);
 
+    function dragHandler(ev: React.DragEvent) {
+        ev.preventDefault();
+    };
+
+    function dropHandler(ev: React.DragEvent) {
+        ev.preventDefault();
+
+        const file: File = ev.dataTransfer.files[0];
+        file.text().then((value) => {
+            turing.utils.importTable(value);
+        });
+    };
+
+
     return (
-        <div className="App">
+        <div className="App" onDragOver={dragHandler} onDrop={dropHandler}>
             <Toolbar />
             <Editor />
             <ProgramTable />
