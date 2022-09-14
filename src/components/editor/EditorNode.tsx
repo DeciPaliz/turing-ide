@@ -10,6 +10,7 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
     
     const [symbol, setSymbol] = useState(null as string | null);
     const [current, setCurrent] = useState(false);
+    const [start, setStart] = useState(false);
 
     let lastClick: number = 0;
 
@@ -19,6 +20,7 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
             globalThis.turing.utils.tape.setValue(props.index, null);
             setSymbol(null);
             props.onInput(false);
+            turing.utils.tape.subscriptions.invokeTapeListeners();
             return;
         }
 
@@ -26,6 +28,7 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
             globalThis.turing.utils.tape.setValue(props.index, event.data!);
             setSymbol(event.data!);
             props.onInput(true);
+            turing.utils.tape.subscriptions.invokeTapeListeners();
         }
     }
 
@@ -36,6 +39,7 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
             // doubleclick
             props.onSetStart();
             globalThis.turing.utils.tape.setStart(props.index);
+            turing.utils.tape.subscriptions.invokeTapeListeners();
         }
         lastClick = ev.timeStamp;
     }
@@ -58,10 +62,15 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
         }
 
         globalThis.turing.utils.tape.subscriptions.tapeListeners.push(() => {
-            const node = globalThis.turing.tape.nodes[props.index];
+            const tape = turing.tape;
+            const node = tape.nodes[props.index];
             if (symbol !== node) {
+                console.log(symbol, node);
                 setSymbol(node);
             }
+
+            if (tape.start === props.index) setStart(true);
+            else setStart(false);
         });
 
         turing.runner.subscriptions.runnerListeners.push(() => {
@@ -69,10 +78,12 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
             if (pointer === props.index) setCurrent(true);
             else setCurrent(false);
         });
+
+        turing.utils.tape.subscriptions.invokeTapeListeners();
     }, []);
 
     return (
-        <div className={"EditorNode" + " " + (current ? "current" : (props.index === globalThis.turing.tape.start ? "start" : "")) + " " + (symbol ? "" : "null")}>
+        <div className={"EditorNode" + " " + (current ? "current" : (start ? "start" : "")) + " " + (symbol ? "" : "null")}>
             <input 
                 onChange={handleChange} 
                 onClick={handleClick}
