@@ -28,3 +28,7 @@
 .EditorNode.start > input {
     background-color: #9F9;
 }
+
+.EditorNode.current > input {
+    background-color: #99F;
+}

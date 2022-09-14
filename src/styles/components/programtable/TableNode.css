@@ -48,3 +48,7 @@
 .TableNode > input.default {
     color: #888;
 }
+
+.TableNode > input.current {
+    background-color: #99F;
+}

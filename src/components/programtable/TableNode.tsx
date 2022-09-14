@@ -24,6 +24,8 @@ export default function TableNode(props: { row: number, col: number, programStat
     const [symbol, setSymbol] = useState(props.inputs.symbol || LEFT_DEFAULT);
     const [programState, setProgramState] = useState(props.inputs.programState || CENTER_DEFAULT);
     const [direction, setDirection] = useState(props.inputs.direction || RIGHT_DEFAULT);
+    
+    const [current, setCurrent] = useState(false);
 
     const [defaultState, setDefaultState] = useState(programState === CENTER_DEFAULT);
 
@@ -129,29 +131,35 @@ export default function TableNode(props: { row: number, col: number, programStat
 
         globalThis.turing.utils.table.subscriptions.tableListeners[subscriptionIndex]();
 
+        turing.runner.subscriptions.runnerListeners.push(() => {
+            const runnerSymbol = turing.tape.nodes[turing.runner.runnerState.pointer];
+            const runnerProgramState = turing.runner.runnerState.programState;
+            setCurrent(props.row === turing.table.alphabet.indexOf(runnerSymbol) && props.col === runnerProgramState);
+        });
+
         return () => {
             globalThis.turing.utils.table.subscriptions.tableListeners[subscriptionIndex!] = undefined;
         };
     }, []);
 
     return (
-        <div className="TableNode">
+        <div className={"TableNode"}>
             <input 
-                className={"tablenode-left " + (symbol === LEFT_DEFAULT ? "default" : "")} 
+                className={"tablenode-left" + (symbol === LEFT_DEFAULT ? " default" : "") + (current ? " current" : "")} 
                 ref={leftRef} 
                 value={symbol} 
                 onChange={handleChange.bind(null, TableNodeInputType.left)}
                 onFocus={handleFocus}
             />
             <input 
-                className={"tablenode-center " + (defaultState ? "default" : "")} 
+                className={"tablenode-center" + (defaultState ? " default" : "") + (current ? " current" : "")} 
                 ref={centerRef} 
                 value={"q" + globalThis.turing.utils.convertToSubscript(programState)} 
                 onChange={handleChange.bind(null, TableNodeInputType.center)}
                 onFocus={handleFocus}
             />
             <input 
-                className={"tablenode-right " + (direction === RIGHT_DEFAULT ? "default" : "")} 
+                className={"tablenode-right" + (direction === RIGHT_DEFAULT ? " default" : "") + (current ? " current" : "")} 
                 ref={rightRef} 
                 value={direction} 
                 onChange={handleChange.bind(null, TableNodeInputType.right)}

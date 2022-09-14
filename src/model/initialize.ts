@@ -14,7 +14,7 @@ import { onTableNodeChange, tableListeners, invokeTableListeners } from './funct
 import { setValue, setStart } from './functions/tape/editor';
 import { tapeListeners, invokeTapeListeners } from './functions/tape/subscriptions';
 
-import { step, run, runnerState } from './runner';
+import { step, run, runnerState, runnerSubscriptions } from './runner';
 
 import notification from './notification';
 
@@ -68,7 +68,8 @@ export default function initialize() {
         runner: {
             step,
             run,
-            runnerState
+            runnerState,
+            subscriptions: runnerSubscriptions
         },
 
         notification,

@@ -9,6 +9,7 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
     const DOUBLE_CLICK_INTERVAL = globalThis.turing.config.DOUBLE_CLICK_INTERVAL;
     
     const [symbol, setSymbol] = useState(null as string | null);
+    const [current, setCurrent] = useState(false);
 
     let lastClick: number = 0;
 
@@ -62,10 +63,16 @@ export default function EditorNode(props: { index: number, onSetStart: Function,
                 setSymbol(node);
             }
         });
+
+        turing.runner.subscriptions.runnerListeners.push(() => {
+            const pointer = turing.runner.runnerState.pointer;
+            if (pointer === props.index) setCurrent(true);
+            else setCurrent(false);
+        });
     }, []);
 
     return (
-        <div className={"EditorNode" + " " + (props.index === globalThis.turing.tape.start ? "start" : "") + " " + (symbol ? "" : "null")}>
+        <div className={"EditorNode" + " " + (current ? "current" : (props.index === globalThis.turing.tape.start ? "start" : "")) + " " + (symbol ? "" : "null")}>
             <input 
                 onChange={handleChange} 
                 onClick={handleClick}

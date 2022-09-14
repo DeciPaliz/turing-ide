@@ -1,4 +1,5 @@
 export let runnerState = {
+    iteration: undefined as number | undefined,
     pointer: undefined as number | undefined,
     programState: undefined as number | undefined
 };
@@ -8,6 +9,15 @@ enum StepResult {
     TERMINATED
 }
 
+export const runnerSubscriptions = {
+    runnerListeners: [],
+    invokeRunnerListeners: function () {
+        turing.runner.subscriptions.runnerListeners.forEach((listener?: Function) => {
+            if (listener) listener();
+        });
+    }
+};
+
 export function step(): StepResult {
     const table = globalThis.turing.table;
     const tape = globalThis.turing.tape;
@@ -15,7 +25,7 @@ export function step(): StepResult {
 
     if (!globalThis.turing.runner.runnerState.pointer) {
         // initialize runner
-        globalThis.turing.runner.runnerState = { pointer: tape.start, programState: 0 }
+        globalThis.turing.runner.runnerState = { iteration: 0, pointer: tape.start, programState: 0 }
     }
     const runnerState = globalThis.turing.runner.runnerState;
 
@@ -48,22 +58,23 @@ export function step(): StepResult {
 
     globalThis.turing.utils.tape.subscriptions.invokeTapeListeners();
 
+    turing.runner.runnerState.iteration++;
+
     if (!table.nodes[0][runnerState.programState]) return StepResult.TERMINATED;
+
+    turing.runner.subscriptions.invokeRunnerListeners();
     
     return StepResult.CONTINUE;
 }
 
 export function run() {
     let result = StepResult.CONTINUE;
-    let iteration: number = 0;
-    while (result !== StepResult.TERMINATED && iteration < globalThis.turing.config.MAX_ITERATIONS) {
+    while (result !== StepResult.TERMINATED && (turing.runner.runnerState.iteration || 0) < globalThis.turing.config.MAX_ITERATIONS)
         result = globalThis.turing.runner.step();
-        iteration++;
-    }
-    turing.runner.runnerState = {};
-    if (iteration === globalThis.turing.config.MAX_ITERATIONS) {
+    if (turing.runner.runnerState.iteration === globalThis.turing.config.MAX_ITERATIONS) {
         turing.notification.showNotification("Внимание!", "Ваша программа слишком долго выполняется. Возможен бесконечный цикл.", { urgent: true });
     } else {
-        turing.notification.showNotification("Завершено", `Программа завершена после ${iteration} шагов.`);
+        turing.notification.showNotification("Завершено", `Программа завершена после ${turing.runner.runnerState.iteration} шагов.`);
     }
+    turing.runner.runnerState = {};
 }
