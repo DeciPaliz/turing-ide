@@ -2,7 +2,7 @@ import './styles/Toolbar.css';
 
 import TitleText from './components/toolbar/TitleText';
 import RunButton from './components/toolbar/RunButton';
-import SaveButton from './components/toolbar/SaveButton';
+import StepButton from './components/toolbar/StepButton';
 import ExportButton from './components/toolbar/ExportButton';
 import HelpButton from './components/toolbar/HelpButton';
 
@@ -14,7 +14,7 @@ export default function Toolbar() {
             </div>
             <div className="Toolbar-center">
                 <RunButton />
-                <SaveButton />
+                <StepButton />
                 <ExportButton />
             </div>
             <div className="Toolbar-right">

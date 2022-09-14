@@ -4,7 +4,7 @@ const resources = {
         "ExportButton": "svg/file.svg",
         "HelpButton":   "svg/question.svg",
         "RunButton":    "svg/play.svg",
-        "SaveButton":   "svg/list.svg"
+//        "StepButton":   "svg/step.svg"
     } as any
 };
 
